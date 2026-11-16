@@ -1,0 +1,10 @@
+db :
+image : postgres:16
+enviropnment :
+  POSTGRES_USER : fin
+  POSTGRES_PASSWORD : password
+  postgres_db : finnance
+ports : ["5432:5432"]
+volumes : ["pgdata:/var/lib/postgresql/data"]
+volumes:
+  pgdata:
