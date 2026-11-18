@@ -1,5 +1,3 @@
-package auth
-
 func ListUsers(db *gorm.DB) gin.HandlerFunc {
 	return func(c *gin.Context) {
 		var users []model.User
