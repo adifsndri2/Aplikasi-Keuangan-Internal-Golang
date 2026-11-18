@@ -22,6 +22,6 @@ export function AuthProvider({children}) {
 export function Protected({children, admin}) {
     const {role} = useAuth()
     if (!role) return <Navigate to="/login" replace/>
-    if (admin && role !== 'ADMIN') return <Navigate to="/" replace/>
+    if (admin && role !== 'admin') return <Navigate to="/" replace/>
     return children
 }

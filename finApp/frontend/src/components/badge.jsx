@@ -6,6 +6,8 @@ const cls = {
     'Purchase Order' : 's',
     ADMIN : 'g',
     USER : 's',
+    admin : 'g',
+    user : 's',
     Aktif : 'g',
     Nonaktif : 'y', 
 }

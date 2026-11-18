@@ -1,3 +1,48 @@
+package ar
+
+import (
+	"strings"
+
+	"github.com/xuri/excelize/v2"
+
+	"github.com/adifsndri2/Aplikasi-Keuangan-Internal-Golang/tree/develop/finApp/cmd/internal/model"
+	"github.com/adifsndri2/Aplikasi-Keuangan-Internal-Golang/tree/develop/finApp/cmd/internal/xl"
+)
+
+type Row struct {
+	Line     int
+	Data     model.ARTransaction
+	Errors   []string
+	Warnings []string
+}
+
+func Parse(path string) ([]Row, error) {
+	f, err := excelize.OpenFile(path)
+	if err != nil {
+		return nil, err
+	}
+	defer f.Close()
+
+	rows := f.GetRows(f.GetSheetName(0))
+	idx, err := xl.Header(rows,
+		"Number",
+		"Invoice Partner Display Name",
+		"Tax Number",
+		"Activities",
+		"Status",
+		"Payment Status",
+		"Invoice/Bill Date",
+		"Due Date",
+		"Untaxed Amount Signed",
+		"Total Signed",
+		"Total in Currency Signed",
+	)
+	if err != nil {
+		return nil, err
+	}
+
+	seen := map[string]bool{}
+	var out []Row
 	for i, r := range rows[1:] {
 		row := Row{Line: i + 2}
 		d := &row.Data
@@ -44,3 +89,5 @@
 		d.CurrencyTotal, _ = xl.Money(xl.Cell(r, idx, "Total in Currency Signed"))
 		out = append(out, row)
 	}
+	return out, nil
+}

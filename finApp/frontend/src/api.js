@@ -19,12 +19,18 @@ async function request(path, {method = 'GET', body, form} = {}) {
     }
 
     const res = await fetch(`/api/v1${path}`, {method, headers, body: playload})
-    if (res.status === 401 && path != 'auth/login') onUnauthorized()
+    if (res.status === 401 && path !== '/auth/login') onUnauthorized()
         if (!res.ok) {
             const data = await res.json().catch(() => ({}))
             throw new Error(data.error || 'Terjadi kesalahan (${res.status})')
         } 
         return res
+}
+
+export async function json(path, options = {}) {
+    const res = await request(path, options)
+    if (res.status === 204) return null
+    return res.json()
 }
 
 //Endpoint export dan template butuh header Authorization, jadi tidak bisa memakai link biasa.

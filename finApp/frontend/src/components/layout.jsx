@@ -3,9 +3,9 @@ import { useAuth } from '../auth'
 
 export default function Layout() {
     const {role, logout} = useAuth()
-    const items = [['/', 'Dashboard'], ['ap', 'Account Payable'], ['ar', 'Account Receivable'], ['reports', 'Financial Reports']]
+    const items = [['/', 'Dashboard'], ['/ap', 'Account Payable'], ['/ar', 'Account Receivable'], ['/reports', 'Financial Reports']]
 
-    if (role === 'ADMIN') items.push(['/users', 'Kelola User'])
+    if (role === 'admin') items.push(['/users', 'Kelola User'])
         return (
             <div className = 'shell'>
                 <aside className = 'side'>
@@ -19,7 +19,7 @@ export default function Layout() {
                     </nav>
                     
                     <div className = 'who'>
-                        Login Sebagai {role === 'ADMIN' ? 'Admin' : 'User'} <button onClick = {logout}>Keluar</button>
+                        Login Sebagai {role === 'admin' ? 'Admin' : 'User'} <button onClick = {logout}>Keluar</button>
                     </div>
                     </aside>
 

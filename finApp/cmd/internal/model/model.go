@@ -2,10 +2,12 @@ package model
 
 import (
 	"time"
+
+	"github.com/shopspring/decimal"
 )
 
 type User struct {
-	ID string `gorm:"primaryKey"`
+	ID uint `gorm:"primaryKey"`
 	Name string
 	Email string `gorm:"uniqueIndex;not null"`
 	PasswordHash string `json:"-"` 
@@ -15,10 +17,10 @@ type User struct {
 }
 
 type ImportBatch struct {
-	ID string `gorm:"primaryKey"`
+	ID uint `gorm:"primaryKey"`
 	Module string
 	FileName string
-	UploadedBy unit
+	UploadedBy uint
 	RowCount int
 	SuccessCount int
 	FailedCount int
@@ -27,23 +29,23 @@ type ImportBatch struct {
 }
 
 type APTransaction struct {
-	ID string `gorm:"primaryKey"`
+	ID uint `gorm:"primaryKey"`
 	DocumentNo string `gorm:"uniqueIndex;not null"`
 	VendorName string `gorm:"index"`
 	BuyerName string `gorm:"index"`
 	OrderDeadline time.Time `gorm:"index"`
 	Description string
 	SourceDocument string
-	PayentStatus string	`gorm:"index"`
+	PaymentStatus string `gorm:"index"`
 	DocumentTotal decimal.Decimal `gorm:"type:decimal(18,2)"`
 	DocumentStatus string `gorm:"index"`
-	ImportBatchID unit
+	ImportBatchID uint
 }
 
 type ARTransaction struct {
-	ID string `gorm:"primaryKey"`
+	ID uint `gorm:"primaryKey"`
 	DocumentNo string `gorm:"uniqueIndex;not null"`
-	PartenerName string `gorm:"index"`
+	PartnerName string `gorm:"index"`
 	IsInternal bool
 	InvoiceDate	time.Time `gorm:"index"`
 	DueDate time.Time
@@ -54,14 +56,14 @@ type ARTransaction struct {
 	CurrencyTotal decimal.Decimal `gorm:"type:decimal(18,2)"`
 	PaymentStatus string `gorm:"index"`
 	JournalStatus string
-	ImportBatchID unit
+	ImportBatchID uint
 }
 
 type Report struct {
-	ID unit `gorm:"primaryKey"`
+	ID uint `gorm:"primaryKey"`
 	Type string
 	Result string //JSON dari reports.Table
-	CreatedBy unit
+	CreatedBy uint
 	CreatedAt time.Time
 }
 
