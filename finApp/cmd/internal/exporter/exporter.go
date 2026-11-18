@@ -69,3 +69,31 @@ func PDF(t reports.Table) ([]byte, error) {
 	return buf.Bytes(), nil
 }
 
+// Handler Report
+func Export (db *gorm.DB) gin.HandlerFunc {
+	return func(c *gin.Context) {
+		t, ok := reports.Load(db, c.Param("id"))
+		if !ok {
+			c.JSON (404, gin.H{"error": "Laporan tidak ditemukan"})
+			return
+		}
+		name := "laporan-" + c.Param("id")
+		switch c.DefaultQuery("format", "PDF") {
+		case "xlsx" :
+			b, err := exporter.XLSX(t)
+			if err != nil {
+				c.Status(500)
+				return
+			}
+			c.Header("Content-Disposition", "attachment; filename = "+name+".xlsx")
+			c.Data(200, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", b)
+			default : 
+			b, err := exporter.PDF(t)
+			if err != nil {
+				c.Status(500)
+				return
+			}
+			c.Header("Content-Dispotition", "attachment; filename = "+name+".pdf")
+		} 
+	}
+}
