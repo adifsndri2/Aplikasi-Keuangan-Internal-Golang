@@ -38,6 +38,7 @@ func Login(db *gorm.DB, secret string) gin.HandlerFunc {
 			tok, _ := jwt.NewWithClaims(jwt.SigningMethodHS256, claims).SignedString([]byte(secret))
 		c.JSON(200, gin.H{"token": tok, "role": u.Role})
 	}
+}
 
 func Required(db *gorm.DB, secret string,) gin.HandlerFunc {
 	return func(c *gin.Context) {
