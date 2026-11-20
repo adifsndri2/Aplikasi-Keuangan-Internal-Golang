@@ -10,7 +10,7 @@ export default function Login() {
     const [error, setError] = useState('')
 
     async function submit(e) {
-        e.PreventDefault()
+        e.preventDefault()
         setError('')
         try {
             await login(email, password)

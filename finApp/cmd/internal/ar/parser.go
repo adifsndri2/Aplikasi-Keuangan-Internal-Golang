@@ -23,7 +23,10 @@ func Parse(path string) ([]Row, error) {
 	}
 	defer f.Close()
 
-	rows := f.GetRows(f.GetSheetName(0))
+	rows, err := f.GetRows(f.GetSheetName(0))
+	if err != nil {
+		return nil, err
+	}
 	idx, err := xl.Header(rows,
 		"Number",
 		"Invoice Partner Display Name",

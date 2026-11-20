@@ -1,8 +1,6 @@
 package ap
 
 import (
-	"strings"
-
 	"github.com/shopspring/decimal"
 	"github.com/xuri/excelize/v2"
 
@@ -23,7 +21,10 @@ func Parse(path string) ([]Row, error) {
 		return nil, err
 	}
 	defer f.Close()
-	rows := f.GetRows(f.GetSheetName(0))
+	rows, err := f.GetRows(f.GetSheetName(0))
+	if err != nil {
+		return nil, err
+	}
 	idx, err := xl.Header(rows, "Order Reference", "Vendor", "Buyer", "Order Deadline", "Total", "Status")
 	if err != nil {
 		return nil, err
