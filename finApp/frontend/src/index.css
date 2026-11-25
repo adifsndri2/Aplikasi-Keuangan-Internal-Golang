@@ -207,3 +207,50 @@ input:disabled, select:disabled {
     justify-content: center; 
     color: var(--mute); 
 }
+
+.e {
+    background: #FEE2E2;
+    color : #991B1B;
+}
+
+input[type = radio] {
+    width : auto;
+    height : auto
+}
+
+.opt {
+    display: flex;
+    align-items: center;
+    gap : 8px;
+    font-size : 13px;
+    color : var(--ink);
+    margin : 0 0 8px;
+}
+
+.opt input {
+    margin : 0;
+}
+
+.scroll {
+    overflow: auto;
+    max-height: 260px;
+    border: 1px solid var(--line);
+    border-radius: 8px;
+}
+
+.pg {
+    height: 28px;
+    padding : 0 8px;
+    background : transparent;
+    color : var(--mute);
+}
+
+.pg.on {
+    color : var(--ink);
+    font-weight : 600;
+}
+
+.pg:disabled {
+    opacity : 0.4;
+    cursor : default;
+}
