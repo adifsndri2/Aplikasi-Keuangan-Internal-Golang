@@ -10,7 +10,7 @@ import (
 	"gorm.io/gorm"
 	"gorm.io/gorm/clause"
 
-	"github.com/adifsndri2/Aplikasi-Keuangan-Internal-Golang/tree/develop/finApp/cmd/internal/model"
+	"github.com/adifsndri2/Aplikasi-Keuangan-Internal-Golang/tree/develop/cmd/internal/model"
 )
 
 type Handler struct {

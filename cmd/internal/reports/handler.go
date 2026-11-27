@@ -8,7 +8,7 @@ import (
 	"github.com/shopspring/decimal"
 	"gorm.io/gorm"
 
-	"github.com/adifsndri2/Aplikasi-Keuangan-Internal-Golang/tree/develop/finApp/cmd/internal/model"
+	"github.com/adifsndri2/Aplikasi-Keuangan-Internal-Golang/tree/develop/cmd/internal/model"
 )
 
 func Generate(db *gorm.DB, kind string) gin.HandlerFunc {
